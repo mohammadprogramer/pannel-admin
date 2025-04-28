@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه شیشه‌ای</title>
+    <!-- فونت وزیر -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <!-- آیکون‌های Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* استایل‌های هدر */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .logo i {
+            margin-left: 10px;
+            font-size: 28px;
+        }
+
+      
+
+        /* استایل‌های بخش اصلی */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn i {
+            margin-left: 8px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* استایل‌های بخش محصولات */
+        .products-section h2 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .products-section h2 i {
+            margin-left: 10px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .product-price {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #f1c40f;
+        }
+
+        /* استایل‌های فوتر */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+
+    .main-nav {
+        display: block;
+    }
+    
+    nav {
+        order: 1;
+    }
+    
+    .auth-icons {
+        order: 2;
+        margin-right: 0;
+    }
+    
+    .cart-icon {
+        order: 3;
+    }
+    
+    .menu-toggle {
+        display: block;
+        order: 4;
+    }
+    
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(40, 40, 40, 0.98);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        flex-direction: column;
+        padding-top: 80px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 9998;
+        margin: 0;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    nav ul.active {
+        right: 0;
+    }
+    
+    nav ul li {
+        margin: 10px 0;
+        padding: 0 25px;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    nav ul li:last-child {
+        border-bottom: none;
+    }
+    
+    nav ul li a {
+        padding: 15px 0;
+        font-size: 17px;
+        justify-content: flex-start;
+        color: #fff;
+        font-weight: 400;
+        transition: all 0.3s ease;
+    }
+    
+    nav ul li a i {
+        margin-left: 12px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    nav ul li a:hover {
+        color: #fff;
+        padding-right: 10px;
+    }
+    
+    nav ul li a:hover i {
+        color: #fff;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        margin: 10px 0 0 30px;
+        border-left: 2px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .dropdown-menu li {
+        margin: 8px 0;
+        padding: 0;
+        border-bottom: none;
+    }
+    
+    .dropdown-menu li a {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.8);
+        padding: 10px 0;
+    }
+    
+    .dropdown-menu li a:hover {
+        color: #fff;
+    }
+    
+    .close-menu {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        font-size: 24px;
+        color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        z-index: 9999;
+        transition: all 0.3s ease;
+    }
+    
+    .close-menu:hover {
+        color: #fff;
+        transform: rotate(90deg);
+    }
+    
+    .overlay {
+        
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 9997;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+
+
+
+
+        /* انیمیشن‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* اسکرول بار */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+
+
+        /* استایل‌های پایه برای تمام دستگاه‌ها */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.main-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.main-menu > li {
+  position: relative;
+  margin: 0 15px;
+}
+
+.main-menu a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+}
+
+.main-menu a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  padding: 10px 0;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.has-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-arrow {
+  margin-right: 5px;
+  transition: transform 0.3s ease;
+}
+
+.has-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.auth-icon, .cart-icon {
+  color: white;
+  font-size: 1.1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-label {
+  margin-right: 5px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* استایل‌های دسکتاپ (992px به بالا) */
+@media (min-width: 992px) {
+  .main-menu {
+    display: flex !important;
+  }
+  
+  .nav-container {
+    justify-content: flex-end;
+  }
+  
+  .auth-label {
+    display: inline;
+  }
+}
+
+/* استایل‌های تبلت (768px تا 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+  .main-menu > li {
+    margin: 0 10px;
+  }
+  
+  .nav-icons {
+    gap: 15px;
+  }
+  
+  .auth-label {
+    display: none;
+  }
+}
+
+/* استایل‌های موبایل (تا 767px) */
+@media (max-width: 767px) {
+  .main-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(40, 40, 40, 0.98);
+    backdrop-filter: blur(25px);
+    flex-direction: column;
+    padding: 80px 20px 20px;
+    transition: all 0.4s ease;
+    z-index: 1000;
+  }
+  
+  .main-menu.active {
+    right: 0;
+  }
+  
+  .main-menu > li {
+    margin: 10px 0;
+    width: 100%;
+  }
+  
+  .dropdown-menu {
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+    margin-top: 10px;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .auth-label {
+    display: none;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* استایل‌های موبایل‌های کوچک (تا 520px) */
+@media (max-width: 520px) {
+  .main-menu {
+    width: 85%;
+    padding-top: 70px;
+  }
+  
+  .nav-icons {
+    gap: 10px;
+  }
+  
+  .auth-icon, .cart-icon {
+    font-size: 1rem;
+  }
+  
+  .menu-toggle {
+    font-size: 1.3rem;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Overlay برای منوی موبایل -->
+    <div class="overlay"></div>
+
+    <header class="glass-card">
+        <div class="logo">
+            <i class="fas fa-store"></i>
+            <span>فروشگاه شیشه‌ای</span>
+        </div>
+            <!-- بخش اصلی منو -->
+            <div class="nav-container">
+                <!-- منوی اصلی -->
+                <ul class="main-menu" id="menu">
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>صفحه اصلی</span>
+                        </a>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#">
+                            <i class="fas fa-box-open"></i>
+                            <span>محصولات</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">کالای دیجیتال</a></li>
+                            <li><a href="#">پوشاک</a></li>
+                            <li><a href="#">لوازم خانگی</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-info-circle"></i>
+                            <span>درباره ما</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-phone"></i>
+                            <span>تماس با ما</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- بخش آیکون‌های سمت راست -->
+                <div class="nav-icons">
+                    <!-- آیکون‌های کاربر -->
+                    <div class="user-actions">
+                        <a href="#" class="auth-icon" title="ثبت نام">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="auth-label">ثبت نام</span>
+                        </a>
+                        <a href="#" class="auth-icon" title="ورود">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span class="auth-label">ورود</span>
+                        </a>
+                    </div>
+                    
+                    <!-- سبد خرید -->
+                    <div class="cart">
+                        <a href="#" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">3</span>
+                        </a>
+                    </div>
+                    
+                    <!-- آیکون منو در حالت موبایل -->
+                    <button class="menu-toggle" aria-label="منوی موبایل">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+
+
+    </header>
+    
+    <main>
+        <section class="hero glass-card">
+            <h1>به فروشگاه شیشه‌ای خوش آمدید</h1>
+            <p>محصولات با کیفیت با بهترین قیمت‌ها را از ما بخواهید</p>
+            <button class="btn">
+                <i class="fas fa-shopping-bag"></i>
+                مشاهده محصولات
+            </button>
+        </section>
+        
+        <section class="glass-card">
+            <h2>
+                <i class="fas fa-fire"></i>
+                محصولات پرطرفدار
+            </h2>
+            <div class="products">
+                <div class="product-card glass-card">
+                    <img src="https://via.placeholder.com/150" alt="محصول" class="product-image">
+                    <h3 class="product-title">محصول نمونه 1</h3>
+                    <p class="product-price">250,000 تومان</p>
+                    <button class="btn">
+                        <i class="fas fa-cart-plus"></i>
+                        افزودن به سبد
+                    </button>
+                </div>
+                
+                <div class="product-card glass-card">
+                    <img src="https://via.placeholder.com/150" alt="محصول" class="product-image">
+                    <h3 class="product-title">محصول نمونه 2</h3>
+                    <p class="product-price">180,000 تومان</p>
+                    <button class="btn">
+                        <i class="fas fa-cart-plus"></i>
+                        افزودن به سبد
+                    </button>
+                </div>
+                
+                <div class="product-card glass-card">
+                    <img src="https://via.placeholder.com/150" alt="محصول" class="product-image">
+                    <h3 class="product-title">محصول نمونه 3</h3>
+                    <p class="product-price">320,000 تومان</p>
+                    <button class="btn">
+                        <i class="fas fa-cart-plus"></i>
+                        افزودن به سبد
+                    </button>
+                </div>
+                
+                <div class="product-card glass-card">
+                    <img src="https://via.placeholder.com/150" alt="محصول" class="product-image">
+                    <h3 class="product-title">محصول نمونه 4</h3>
+                    <p class="product-price">210,000 تومان</p>
+                    <button class="btn">
+                        <i class="fas fa-cart-plus"></i>
+                        افزودن به سبد
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="glass-card">
+        <p>تمامی حقوق برای فروشگاه شیشه‌ای محفوظ است © 2023</p>
+    </footer>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // انتخاب عناصر اصلی
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainMenu = document.querySelector('.main-menu');
+    const overlay = document.querySelector('.overlay');
+    const dropdownArrows = document.querySelectorAll('.dropdown-arrow');
+    
+    // تابع برای باز کردن منو
+    function openMenu() {
+        mainMenu.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // تابع برای بستن منو
+    function closeMenu() {
+        mainMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        // بستن همه منوهای آبشاری در حالت موبایل
+        if (window.innerWidth <= 991) {
+            document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+                dropdown.style.display = 'none';
+            });
+        }
+    }
+    
+    // مدیریت کلیک روی دکمه منو
+    menuToggle.addEventListener('click', function() {
+        if (mainMenu.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+    
+    // مدیریت کلیک روی overlay
+    overlay.addEventListener('click', closeMenu);
+    
+    // مدیریت منوهای آبشاری
+    document.querySelectorAll('.has-dropdown').forEach(item => {
+        const link = item.querySelector('a');
+        const dropdown = item.querySelector('.dropdown-menu');
+        
+        link.addEventListener('click', function(e) {
+            // فقط در حالت موبایل و تبلت
+            if (window.innerWidth <= 991) {
+                e.preventDefault();
+                
+                // بستن دیگر منوهای باز
+                document.querySelectorAll('.dropdown-menu').forEach(d => {
+                    if (d !== dropdown) {
+                        d.style.display = 'none';
+                    }
+                });
+                
+                // نمایش/مخفی کردن منوی جاری
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+    });
+    
+    // مدیریت تغییر سایز صفحه
+    window.addEventListener('resize', function() {
+        // اگر صفحه بزرگتر از 991px شد
+        if (window.innerWidth > 991) {
+            closeMenu();
+            
+            // بازگرداندن حالت اولیه منوهای آبشاری
+            document.querySelectorAll('.dropdown-menu').forEach(dropdown => {
+                dropdown.style.display = '';
+            });
+        }
+    });
+    
+    // مدیریت اسکرول صفحه هنگام باز بودن منو
+    window.addEventListener('scroll', function() {
+        if (mainMenu.classList.contains('active') && window.innerWidth <= 991) {
+            window.scrollTo(0, 0);
+        }
+    });
+});
+   </script>
+
+
+</body>
+</html>

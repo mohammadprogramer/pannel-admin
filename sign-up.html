@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم ثبت نام شیشه‌ای - حالت دارک/لایت</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- فونت Vazir -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+    <style>
+        :root {
+            /* تم لایت (پیش‌فرض) */
+            --glass-color: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --glass-highlight: rgba(255, 255, 255, 0.5);
+            --text-color: #333;
+            --bg-color: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+            --input-bg: rgba(255, 255, 255, 0.7);
+            --input-border: rgba(255, 255, 255, 0.8);
+            --social-bg: rgba(255, 255, 255, 0.7);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --accent: #3a86ff;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --placeholder-color: rgba(51, 51, 51, 0.5);
+        }
+
+        /* تم دارک */
+        body.dark-mode {
+            --glass-color: rgba(30, 30, 30, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-highlight: rgba(255, 255, 255, 0.1);
+            --text-color: #fff;
+            --bg-color: linear-gradient(135deg, #121212, #0a0a0a);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --input-border: rgba(255, 255, 255, 0.15);
+            --social-bg: rgba(255, 255, 255, 0.08);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --placeholder-color: rgba(255, 255, 255, 0.5);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: var(--bg-color);
+            font-family: Vazir, 'Segoe UI', Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(58, 134, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(233, 30, 99, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .register-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .glass-card {
+            width: 100%;
+            max-width: 450px;
+            padding: 2rem;
+            background: var(--glass-color);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow),
+                inset 0 4px 12px var(--glass-highlight);
+            transition: all 0.5s ease;
+        }
+
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: white;
+        }
+
+        .fa-moon {
+            right: 10px;
+        }
+
+        .fa-sun {
+            left: 10px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            background: rgba(58, 134, 255, 0.15);
+            padding: 0.8rem;
+            border-radius: 50%;
+            border: 2px solid rgba(58, 134, 255, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .input-group {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .input-group:focus-within {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.1);
+        }
+
+        .input-group-text {
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--text-color);
+            width: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--text-color);
+            height: 45px;
+            border-radius: 0 8px 8px 0 !important;
+            padding: 0.5rem 1rem;
+            border-right: none !important;
+            border-left: 1px solid var(--input-border) !important;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: var(--glass-highlight);
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 0 0.25rem rgba(58, 134, 255, 0.15);
+        }
+
+        .form-control::placeholder {
+            color: var(--placeholder-color);
+            font-size: 0.9rem;
+        }
+
+        /* سیستم قدرت رمز عبور */
+        .password-strength {
+            height: 5px;
+            background: #eee;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .password-strength {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0;
+            transition: all 0.3s ease;
+        }
+
+        .strength-0 {
+            width: 20%;
+            background: var(--danger);
+        }
+
+        .strength-1 {
+            width: 40%;
+            background: var(--danger);
+        }
+
+        .strength-2 {
+            width: 60%;
+            background: var(--warning);
+        }
+
+        .strength-3 {
+            width: 80%;
+            background: var(--success);
+        }
+
+        .strength-4 {
+            width: 100%;
+            background: var(--success);
+        }
+
+        .strength-text {
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: var(--accent);
+            border: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            height: 50px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .btn-register:hover {
+            background: #2a75e6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* لودینگ */
+        .btn-loading .btn-text {
+            visibility: hidden;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 576px) {
+            .glass-card {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switcher">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </span>
+        </label>
+    </div>
+
+    <div class="register-wrapper">
+        <div class="glass-card">
+            <div class="logo">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            
+            <h2>ثبت نام حساب کاربری</h2>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullname" class="form-label">نام کامل</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="fullname" placeholder="نام و نام خانوادگی خود را وارد کنید" required>
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">آدرس ایمیل</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="email" placeholder="example@example.com" required>
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">رمز عبور</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" placeholder="حداقل 8 کاراکتر" required minlength="8">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">قدرت رمز عبور: بسیار ضعیف</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">تکرار رمز عبور</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="رمز عبور را مجدد وارد کنید" required>
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    </div>
+                    <div class="invalid-feedback" id="passwordError">رمزهای عبور مطابقت ندارند</div>
+                </div>
+                
+                <button type="submit" class="btn btn-register">
+                    <span class="btn-text">ثبت نام</span>
+                </button>
+                
+                <div class="text-center mt-3">
+                    <span>حساب کاربری دارید؟ </span>
+                    <a href="#">ورود به سیستم</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const passwordError = document.getElementById('passwordError');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            // بررسی حالت ذخیره شده در localStorage
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'enabled') {
+                body.classList.add('dark-mode');
+                themeToggle.checked = true;
+            }
+            
+            // تغییر تم
+            themeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    body.classList.remove('dark-mode');
+                    localStorage.removeItem('darkMode');
+                }
+            });
+
+            // سیستم قدرت رمز عبور
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                
+                // بررسی طول رمز
+                if (password.length >= 8) strength += 1;
+                // بررسی حروف کوچک
+                if (password.match(/[a-z]/)) strength += 1;
+                // بررسی حروف بزرگ
+                if (password.match(/[A-Z]/)) strength += 1;
+                // بررسی اعداد
+                if (password.match(/[0-9]/)) strength += 1;
+                // بررسی نمادها
+                if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+                
+                // به روزرسانی نوار قدرت
+                strengthBar.className = 'strength-bar strength-' + strength;
+                
+                // به روزرسانی متن قدرت
+                const strengthMessages = [
+                    'بسیار ضعیف',
+                    'ضعیف',
+                    'متوسط',
+                    'قوی',
+                    'بسیار قوی'
+                ];
+                strengthText.textContent = 'قدرت رمز عبور: ' + strengthMessages[strength];
+                
+                // تغییر رنگ متن بر اساس قدرت
+                const textColors = [
+                    'var(--danger)',
+                    'var(--danger)',
+                    'var(--warning)',
+                    'var(--success)',
+                    'var(--success)'
+                ];
+                strengthText.style.color = textColors[strength];
+            });
+
+            // بررسی تطابق رمزهای عبور
+            confirmPasswordInput.addEventListener('input', function() {
+                if (passwordInput.value !== this.value) {
+                    this.classList.add('is-invalid');
+                    passwordError.style.display = 'block';
+                } else {
+                    this.classList.remove('is-invalid');
+                    passwordError.style.display = 'none';
+                    this.classList.add('is-valid');
+                }
+            });
+
+            // ارسال فرم
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const btn = this.querySelector('button[type="submit"]');
+                btn.classList.add('btn-loading');
+                
+                // شبیه‌سازی ارسال فرم
+                setTimeout(() => {
+                    btn.classList.remove('btn-loading');
+                    
+                    // نمایش پیام موفقیت
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'alert alert-success mt-3';
+                    successMsg.innerHTML = '<i class="fas fa-check-circle"></i> ثبت‌نام شما با موفقیت انجام شد!';
+                    this.appendChild(successMsg);
+                    
+                    // ریست فرم
+                    setTimeout(() => {
+                        this.reset();
+                        strengthBar.className = 'strength-bar';
+                        strengthText.textContent = 'قدرت رمز عبور: بسیار ضعیف';
+                        strengthText.style.color = '';
+                        successMsg.remove();
+                    }, 3000);
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
